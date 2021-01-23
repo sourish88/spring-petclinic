@@ -76,7 +76,7 @@ pipeline {
                     build job:'Deployment/DockerDeployPipiline' , parameters:[
                      string(name: "APP_NAME",  value: appName),
                      string(name: "DOCKER_REPO", value: registry),
-                     string(name: "VERSION_TAG",  value: "1.0.$BUILD_NUMBER")
+                     string(name: "VERSION_TAG",  value: "1.0.$BUILD_NUMBER"),
                      string(name: "ENV_NAME",  value: "Dev")
                    ]
                 }
