@@ -20,7 +20,7 @@ pipeline {
             steps {
                 sh 'mvn -B -DskipTests clean package'
             }
-        }
+        } // End of stage
 
         //Test stage
         stage('Test') {
@@ -40,7 +40,7 @@ pipeline {
                     junit 'target/surefire-reports/*.xml'
                 }
             }
-        }
+        } // End of stage
 
         // Build and Publish Image
         stage('Publish') {
@@ -53,7 +53,7 @@ pipeline {
                     }
                 }
             }            
-        }
+        } // End of stage
 
         // Trigger deployment
         stage('Deploy Dev') {
@@ -68,6 +68,6 @@ pipeline {
                    ]
                 }
             }            
-        }
+        } // End of stage
     }
 }
