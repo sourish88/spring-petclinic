@@ -13,8 +13,7 @@ pipeline {
             // Docker agent for build
             agent {
                 docker {
-                    image 'maven:3-alpine'
-                    args '-v /root/.m2:/root/.m2'
+                    image 'openjdk:8-jdk-alpine'
                 }
             }
             steps {
@@ -23,37 +22,22 @@ pipeline {
         }
 
         //Test stage
-        stage('Test') {
-            // Docker agent for build
-            agent {
-                docker {
-                    image 'maven:3-alpine'
-                    args '-v /root/.m2:/root/.m2'
-                }
-            }
-            steps {
-                sh 'mvn test'
-            }
-            post {
-                always {
-                    junit 'target/surefire-reports/*.xml'
-                }
-            }
-        }
-
-        // Deliver stage
-        stage('Deliver') {
-            // Docker agent for build
-            agent {
-                docker {
-                    image 'maven:3-alpine'
-                    args '-v /root/.m2:/root/.m2'
-                }
-            }
-            steps {
-                sh './jenkins/scripts/deliver.sh'
-            }
-        }
+        // stage('Test') {
+        //     // Docker agent for build
+        //     agent {
+        //         docker {
+        //             image 'openjdk:8-jdk-alpine'
+        //         }
+        //     }
+        //     steps {
+        //         sh 'mvn test'
+        //     }
+        //     post {
+        //         always {
+        //             junit 'target/surefire-reports/*.xml'
+        //         }
+        //     }
+        // }
 
         // Build and Publish Image
         stage('Publish') {
