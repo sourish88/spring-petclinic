@@ -22,22 +22,23 @@ pipeline {
         }
 
         //Test stage
-        // stage('Test') {
-        //     // Docker agent for build
-        //     agent {
-        //         docker {
-        //             image 'openjdk:8-jdk-alpine'
-        //         }
-        //     }
-        //     steps {
-        //         sh 'mvn test'
-        //     }
-        //     post {
-        //         always {
-        //             junit 'target/surefire-reports/*.xml'
-        //         }
-        //     }
-        // }
+        stage('Test') {
+            // Docker agent for build
+            agent {
+                docker {
+                    image 'openjdk:8-jdk-alpine'
+                }
+            }
+            steps {
+                // sh 'mvn test'
+                sh 'Write maven test command'
+            }
+            // post {
+            //     always {
+            //         junit 'target/surefire-reports/*.xml'
+            //     }
+            // }
+        }
 
         // Build and Publish Image
         stage('Publish') {
