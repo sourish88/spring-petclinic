@@ -13,7 +13,8 @@ pipeline {
             // Docker agent for build
             agent {
                 docker {
-                    image 'openjdk:8-jdk-alpine'
+                    image 'maven:3-alpine'
+                    args '-v /root/.m2:/root/.m2'
                 }
             }
             steps {
@@ -26,18 +27,19 @@ pipeline {
             // Docker agent for build
             agent {
                 docker {
-                    image 'openjdk:8-jdk-alpine'
+                    image 'maven:3-alpine'
+                    args '-v /root/.m2:/root/.m2'
                 }
             }
             steps {
                 // sh 'mvn test'
-                sh 'Write maven test command'
+                sh 'mvn test'
             }
-            // post {
-            //     always {
-            //         junit 'target/surefire-reports/*.xml'
-            //     }
-            // }
+            post {
+                always {
+                    junit 'target/surefire-reports/*.xml'
+                }
+            }
         }
 
         // Build and Publish Image
